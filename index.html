@@ -5,79 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ExcelMaster｜中級〜上級 関数学習サイト</title>
   <meta name="description" content="Excel中級〜上級関数を、問題・疑似Excelプレイグラウンド・答え合わせで反復学習できるWebサイト。" />
-  <script src="https://cdn.jsdelivr.net/npm/hyperformula/dist/hyperformula.full.min.js"></script>
-  <style>
-    :root{--bg:#f6f1e8;--paper:#fffaf1;--ink:#221b18;--muted:#71665f;--line:#e7d9c7;--accent:#8c5cf6;--good:#0f8a5f;--bad:#c0392b;--warn:#9b6b00;--shadow:0 18px 45px rgba(58,41,25,.12);--radius:20px}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,#fff 0,#fff5df 22%,transparent 45%),linear-gradient(135deg,#f6efe1,#f8f2f8 55%,#eaf7f3)}
-    button,input{font:inherit} button{cursor:pointer;border:0} .app{max-width:1480px;margin:auto;padding:24px}.hero{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;margin-bottom:20px}.hero>div:first-child{background:linear-gradient(135deg,#1d1826,#362052 55%,#54377e);color:#fff;border-radius:28px;padding:34px 38px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero h1{margin:.1rem 0 .4rem;font-size:clamp(2rem,4vw,4.5rem);line-height:1}.hero span{color:#ffe8a8}.eyebrow{letter-spacing:.18em;text-transform:uppercase;color:#d7c8ff;font-weight:800}.lead{max-width:780px;line-height:1.8;color:#f4eeff}.hero-card{background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;box-shadow:var(--shadow)}.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}.stat strong{font-size:2rem;display:block}.stat span{color:var(--muted);font-size:.9rem}
-    .layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:20px}.panel{background:rgba(255,250,241,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.side{display:flex;flex-direction:column;gap:14px}.tools{padding:16px}.search{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.chip,.ghost{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 12px}.chip.active,.primary{background:linear-gradient(135deg,var(--accent),#f05d8e);color:#fff}.primary{border-radius:14px;padding:12px 16px}.list{max-height:72vh;overflow:auto;padding:6px;display:flex;flex-direction:column;gap:8px}.item{text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}.item.active{outline:3px solid rgba(140,92,246,.22);border-color:#b99cff}.item b{display:block}.item small{color:var(--muted)}.badge{float:right;border-radius:999px;background:#f4e9ff;color:#5c35b8;padding:3px 8px;font-size:.78rem}
-    .workspace{display:grid;gap:16px}.challenge{padding:22px}.top{display:flex;justify-content:space-between;gap:14px;align-items:start}.meta{color:var(--accent);font-weight:800}.scenario{line-height:1.8;color:var(--muted)}.tags{display:flex;gap:8px;flex-wrap:wrap}.tag{background:#f4e9ff;color:#5733ad;border-radius:999px;padding:6px 10px;font-size:.85rem}.task{margin-top:14px;background:#fff;border:1px dashed #d8c4f8;border-radius:16px;padding:14px}.sheet{padding:14px}.bar{display:grid;grid-template-columns:82px minmax(0,1fr) auto auto auto;gap:10px}.addr{background:#1d1826;color:#fff;border-radius:12px;display:grid;place-items:center;font-weight:800}.formula{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;font-family:Consolas,monospace}.help{font-size:.9rem;color:var(--muted);margin:10px 0}.gridwrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:16px}.grid{border-collapse:collapse;min-width:900px;width:100%}.grid th{position:sticky;top:0;background:#f4eadb}.grid th,.grid td{border:1px solid #eadfce;padding:7px 8px;min-width:86px;height:34px}.grid th:first-child{min-width:42px}.grid td{background:#fff}.grid .answer{background:#fff5c2;outline:2px solid #e6b800}.grid .header{background:#f6efe1;font-weight:800}.grid .text{color:#453b35}.split{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.feedback,.glossary{padding:18px}.ok{border-left:6px solid var(--good);background:#eefbf5}.ng{border-left:6px solid var(--bad);background:#fff0ee}.warn{border-left:6px solid var(--warn);background:#fff8e7}.feedbackBox{border-radius:16px;padding:14px}.feedback code{background:#fff;padding:2px 6px;border-radius:6px}.glossary ul{line-height:1.8;margin:0;padding-left:1.2rem;color:var(--muted)}
-    @media(max-width:980px){.hero,.layout,.split{grid-template-columns:1fr}.hero-card{grid-template-columns:repeat(3,1fr)}.bar{grid-template-columns:70px 1fr}.bar button{grid-column:auto}.list{max-height:360px}}
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<div class="app">
-  <header class="hero"><div><p class="eyebrow">ExcelMaster</p><h1>Excel関数<br><span>中級〜上級トレーニング</span></h1><p class="lead">問題を選ぶ → シートを確認 → 数式を書く → 答え合わせ。ブラウザだけで、Excelに近い感覚で関数を反復練習できます。</p></div><div class="hero-card"><div class="stat"><strong id="done">0</strong><span>完了</span></div><div class="stat"><strong id="tried">0</strong><span>挑戦済み</span></div><div class="stat"><strong id="best">0%</strong><span>平均ベスト</span></div></div></header>
-  <div class="layout"><aside class="side"><div class="panel tools"><input id="search" class="search" placeholder="XLOOKUP / FILTER / 集計 など"><div class="chips"><button class="chip active" data-filter="all">全部</button><button class="chip" data-filter="中級">中級</button><button class="chip" data-filter="上級">上級</button><button class="chip" data-filter="365">365</button></div><button id="random" class="ghost">ランダム出題</button></div><nav id="list" class="list panel"></nav></aside>
-  <main class="workspace"><section class="panel challenge"><div class="top"><div><p id="meta" class="meta"></p><h2 id="title"></h2></div><div><button id="prev" class="ghost">前へ</button> <button id="next" class="ghost">次へ</button></div></div><p id="scenario" class="scenario"></p><div id="tags" class="tags"></div><div class="task"><b>今回のミッション</b><p id="mission"></p><details><summary>ヒントを見る</summary><ol id="hints"></ol></details></div></section>
-  <section class="panel sheet"><div class="bar"><div id="target" class="addr">H2</div><input id="formula" class="formula" spellcheck="false" placeholder="=SUMIFS(...)"><button id="check" class="primary">答え合わせ</button><button id="reset" class="ghost">リセット</button><button id="answer" class="ghost">答えを見る</button></div><div class="help">黄色のセルが解答セルです。数式バーに <code>=XLOOKUP(...)</code> のように入力してください。</div><div class="gridwrap"><table id="grid" class="grid"></table></div></section>
-  <section class="split"><div class="panel feedback"><h3>採点結果</h3><div id="feedback" class="feedbackBox warn">まだ採点していません。</div></div><div class="panel glossary"><h3>使う関数のメモ</h3><ul id="glossary"></ul></div></section></main></div>
-</div>
-<script>
-const TABLES={
- sales:[["月","地域","担当","商品","売上","数量","評価"],[4,"関東","佐藤","PC",120000,2,"A"],[4,"関西","田中","Phone",90000,3,"B"],[5,"関東","佐藤","PC",140000,2,"A"],[5,"関東","鈴木","Tablet",80000,4,"B"],[6,"関西","田中","PC",160000,2,"A"],[6,"九州","山田","Phone",70000,2,"C"],[4,"関東","鈴木","Phone",110000,5,"A"],[5,"関西","佐藤","Tablet",65000,2,"B"],[6,"関東","山田","PC",180000,3,"A"],[4,"九州","田中","PC",95000,1,"B"],[5,"九州","鈴木","Phone",76000,2,"C"],[6,"関東","佐藤","Tablet",88000,2,"B"]],
- products:[["商品","単価","カテゴリ","粗利率"],["PC",60000,"機器",0.3],["Phone",30000,"通信",0.25],["Tablet",20000,"機器",0.22],["Monitor",25000,"周辺",0.18],["Keyboard",8000,"周辺",0.15]],
- staff:[["氏名","メール","コード","電話","点数"],["佐藤 花子","hanako.sato@example.co.jp","HR-2026-001","03-1234-5678",92],["田中 太郎","taro.tanaka@example.co.jp","SA-2026-014","06-2345-6789",81],["鈴木 海","suzuki.kai@example.net","EN-2026-103","092-111-2222",68],["山田 空","sora.yamada@example.com","CS-2026-032","052-333-4444",75]],
- dates:[["案件","開始日","終了日","期限"],["A","2026-04-01","2026-04-30","2026-05-10"],["B","2026-04-10","2026-05-20","2026-06-01"],["C","2026-05-01","2026-06-15","2026-06-30"],["D","2026-05-22","2026-05-22","2026-05-29"]]
-};
-const F={SUMIFS:"複数条件で合計",COUNTIFS:"複数条件で件数",AVERAGEIFS:"複数条件で平均",MAXIFS:"条件付き最大",MINIFS:"条件付き最小",SUMPRODUCT:"配列同士を掛けて合計",XLOOKUP:"新しい検索関数",VLOOKUP:"縦方向検索",INDEX:"位置指定で値を返す",MATCH:"位置を返す",XMATCH:"新しいMATCH",FILTER:"条件抽出",UNIQUE:"重複削除",SORT:"並べ替え",TAKE:"先頭/末尾を取り出す",TEXTJOIN:"文字列結合",TEXTBEFORE:"区切り前",TEXTAFTER:"区切り後",TEXTSPLIT:"文字列分割",LEFT:"左から抽出",RIGHT:"右から抽出",FIND:"位置検索",SUBSTITUTE:"置換",TRIM:"余分な空白削除",IF:"条件分岐",IFS:"複数条件分岐",IFERROR:"エラー時の代替",LET:"式内変数",LAMBDA:"独自関数化",ROUNDUP:"切り上げ",NETWORKDAYS:"営業日数",EOMONTH:"月末日",DATEDIF:"期間差",WORKDAY:"営業日後",CHOOSECOLS:"列選択",HSTACK:"横結合",VSTACK:"縦結合"};
-const C=[
-{id:"s01",lv:"中級",cat:"条件集計",t:"SUMIFS：関東のPC売上",table:"sales",target:"I2",req:["SUMIFS"],exp:440000,a:"=SUMIFS(E2:E13,B2:B13,\"関東\",D2:D13,\"PC\")",m:"地域が関東、商品がPCの売上合計を出してください。",h:["合計範囲は売上列です。","条件範囲は地域列と商品列です。"]},
-{id:"s02",lv:"中級",cat:"条件集計",t:"COUNTIFS：4月のA評価",table:"sales",target:"I2",req:["COUNTIFS"],exp:2,a:"=COUNTIFS(A2:A13,4,G2:G13,\"A\")",m:"月が4、評価がAの件数を数えてください。",h:["月列と評価列を条件範囲にします。"]},
-{id:"s03",lv:"中級",cat:"条件集計",t:"AVERAGEIFS：5月の関東平均",table:"sales",target:"I2",req:["AVERAGEIFS"],exp:110000,a:"=AVERAGEIFS(E2:E13,B2:B13,\"関東\",A2:A13,5)",m:"5月かつ関東の売上平均を出してください。",h:["平均範囲は売上列です。"]},
-{id:"s04",lv:"中級",cat:"条件集計",t:"MAXIFS：PCの最高売上",table:"sales",target:"I2",req:["MAXIFS"],exp:180000,a:"=MAXIFS(E2:E13,D2:D13,\"PC\")",m:"商品がPCの売上の最大値を出してください。",h:["最大範囲と条件範囲の順序に注意。"]},
-{id:"s05",lv:"中級",cat:"条件集計",t:"MINIFS：九州の最低売上",table:"sales",target:"I2",req:["MINIFS"],exp:70000,a:"=MINIFS(E2:E13,B2:B13,\"九州\")",m:"地域が九州の売上の最小値を出してください。",h:["九州は3件あります。"]},
-{id:"s06",lv:"上級",cat:"配列計算",t:"SUMPRODUCT：売上加重平均",table:"sales",target:"I2",req:["SUMPRODUCT"],exp:123846.153846,a:"=SUMPRODUCT(E2:E13,F2:F13)/SUM(F2:F13)",m:"数量で重み付けした売上の平均を出してください。",h:["売上×数量の合計を数量合計で割ります。"]},
-{id:"l01",lv:"中級",cat:"検索",t:"XLOOKUP：Tabletの単価",table:"products",target:"G2",req:["XLOOKUP"],exp:20000,a:"=XLOOKUP(\"Tablet\",A2:A6,B2:B6)",m:"商品名Tabletの単価をXLOOKUPで返してください。",h:["検索範囲は商品列、戻り範囲は単価列。"]},
-{id:"l02",lv:"中級",cat:"検索",t:"IFERROR＋XLOOKUP：未登録対応",table:"products",target:"G2",req:["IFERROR","XLOOKUP"],exp:"未登録",a:"=IFERROR(XLOOKUP(\"Mouse\",A2:A6,B2:B6),\"未登録\")",m:"Mouseを検索し、見つからなければ「未登録」と表示してください。",h:["XLOOKUPをIFERRORで包みます。"]},
-{id:"l03",lv:"中級",cat:"検索",t:"VLOOKUP：PCのカテゴリ",table:"products",target:"G2",req:["VLOOKUP"],exp:"機器",a:"=VLOOKUP(\"PC\",A2:D6,3,FALSE)",m:"PCのカテゴリをVLOOKUPで返してください。",h:["カテゴリは表範囲の3列目です。"]},
-{id:"l04",lv:"上級",cat:"検索",t:"INDEX＋MATCH：Phoneの粗利率",table:"products",target:"G2",req:["INDEX","MATCH"],exp:.25,a:"=INDEX(D2:D6,MATCH(\"Phone\",A2:A6,0))",m:"Phoneの粗利率をINDEXとMATCHで返してください。",h:["MATCHで行位置を取り、INDEXで返します。"]},
-{id:"l05",lv:"中級",cat:"検索",t:"XMATCH：Monitorの位置",table:"products",target:"G2",req:["XMATCH"],exp:4,a:"=XMATCH(\"Monitor\",A2:A6)",m:"商品リスト内でMonitorが何番目か返してください。",h:["見出しを含めずA2:A6を使います。"]},
-{id:"d01",lv:"365",cat:"動的配列",t:"FILTER：PCだけ抽出",table:"sales",target:"I2",req:["FILTER"],exp:"PC",a:"=FILTER(A2:G13,D2:D13=\"PC\")",m:"商品がPCの行だけを抽出してください。",h:["抽出範囲はA2:G13、条件はD列です。"]},
-{id:"d02",lv:"365",cat:"動的配列",t:"UNIQUE：地域一覧",table:"sales",target:"I2",req:["UNIQUE"],exp:"関東",a:"=UNIQUE(B2:B13)",m:"地域の重複なし一覧を作ってください。",h:["地域列だけを指定します。"]},
-{id:"d03",lv:"365",cat:"動的配列",t:"SORT：売上降順",table:"sales",target:"I2",req:["SORT"],exp:6,a:"=SORT(A2:G13,5,-1)",m:"売上が高い順に表を並べ替えてください。",h:["売上列は抽出範囲の5列目です。"]},
-{id:"d04",lv:"365",cat:"動的配列",t:"TAKE＋SORT：上位3件",table:"sales",target:"I2",req:["TAKE","SORT"],exp:6,a:"=TAKE(SORT(A2:G13,5,-1),3)",m:"売上上位3件だけを取り出してください。",h:["SORTしてからTAKEします。"]},
-{id:"d05",lv:"365",cat:"動的配列",t:"CHOOSECOLS：必要列だけ",table:"sales",target:"I2",req:["CHOOSECOLS"],exp:4,a:"=CHOOSECOLS(A1:G13,1,2,4,5)",m:"月・地域・商品・売上だけを抜き出してください。",h:["A:Gの中で1,2,4,5列目。"]},
-{id:"t01",lv:"中級",cat:"文字列",t:"TEXTBEFORE：メールのユーザー名",table:"staff",target:"G2",req:["TEXTBEFORE"],exp:"hanako.sato",a:"=TEXTBEFORE(B2,\"@\")",m:"B2のメールアドレスから@より前を取り出してください。",h:["区切り文字は@です。"]},
-{id:"t02",lv:"中級",cat:"文字列",t:"TEXTAFTER：ドメイン抽出",table:"staff",target:"G2",req:["TEXTAFTER"],exp:"example.co.jp",a:"=TEXTAFTER(B2,\"@\")",m:"B2のメールアドレスから@より後を取り出してください。",h:["TEXTBEFOREの反対です。"]},
-{id:"t03",lv:"365",cat:"文字列",t:"TEXTSPLIT：コード分割",table:"staff",target:"G2",req:["TEXTSPLIT"],exp:"HR",a:"=TEXTSPLIT(C2,\"-\")",m:"C2のコードをハイフンで分割してください。",h:["結果は横方向にスピルします。"]},
-{id:"t04",lv:"中級",cat:"文字列",t:"LEFT＋FIND：部署コード",table:"staff",target:"G2",req:["LEFT","FIND"],exp:"HR",a:"=LEFT(C2,FIND(\"-\",C2)-1)",m:"C2から最初のハイフンより前の部署コードを取り出してください。",h:["FINDでハイフン位置を探します。"]},
-{id:"t05",lv:"中級",cat:"文字列",t:"SUBSTITUTE：電話番号のハイフン除去",table:"staff",target:"G2",req:["SUBSTITUTE"],exp:"0312345678",a:"=SUBSTITUTE(D2,\"-\",\"\")",m:"D2の電話番号からハイフンを消してください。",h:["置換後文字列は空文字です。"]},
-{id:"t06",lv:"中級",cat:"文字列",t:"TEXTJOIN：氏名一覧",table:"staff",target:"G2",req:["TEXTJOIN"],exp:"佐藤 花子 / 田中 太郎 / 鈴木 海 / 山田 空",a:"=TEXTJOIN(\" / \",TRUE,A2:A5)",m:"氏名を「 / 」区切りで1セルにまとめてください。",h:["空白セルを無視する指定はTRUE。"]},
-{id:"j01",lv:"中級",cat:"論理",t:"IF：高得点判定",table:"staff",target:"G2",req:["IF"],exp:"合格",a:"=IF(E2>=80,\"合格\",\"要確認\")",m:"点数が80以上なら合格、未満なら要確認と表示してください。",h:["比較演算子>=を使います。"]},
-{id:"j02",lv:"上級",cat:"論理",t:"IFS：ランク付け",table:"staff",target:"G2",req:["IFS"],exp:"S",a:"=IFS(E2>=90,\"S\",E2>=80,\"A\",E2>=70,\"B\",TRUE,\"C\")",m:"点数に応じてS/A/B/Cを返してください。",h:["最後はTRUEで受けます。"]},
-{id:"j03",lv:"上級",cat:"可読性",t:"LET：粗利額",table:"sales",target:"I2",req:["LET"],exp:36000,a:"=LET(sales,E2,rate,0.3,sales*rate)",m:"E2の売上に粗利率30%をかける式をLETで書いてください。",h:["salesとrateという変数を使うと読みやすいです。"]},
-{id:"j04",lv:"上級",cat:"可読性",t:"LAMBDA：税込計算",table:"products",target:"G2",req:["LAMBDA"],exp:66000,a:"=LAMBDA(x,x*1.1)(B2)",m:"B2の単価を受け取り税込価格を返すLAMBDAを作って実行してください。",h:["LAMBDA(引数,計算)(値) の形です。"]},
-{id:"j05",lv:"中級",cat:"数値",t:"ROUNDUP：千円単位に切り上げ",table:"sales",target:"I2",req:["ROUNDUP"],exp:120000,a:"=ROUNDUP(E2,-3)",m:"E2の売上を千円単位で切り上げてください。",h:["桁数に-3を指定します。"]},
-{id:"dt01",lv:"中級",cat:"日付",t:"DATEDIF：案件Bの日数差",table:"dates",target:"G2",req:["DATEDIF"],exp:40,a:"=DATEDIF(B3,C3,\"d\")",m:"案件Bの開始日から終了日までの日数差を出してください。",h:["単位はdです。"]},
-{id:"dt02",lv:"中級",cat:"日付",t:"EOMONTH：開始日の月末",table:"dates",target:"G2",req:["EOMONTH"],exp:"2026-04-30",a:"=EOMONTH(B2,0)",m:"案件Aの開始日が属する月の月末日を返してください。",h:["同じ月なら第2引数は0です。"]},
-{id:"dt03",lv:"上級",cat:"日付",t:"NETWORKDAYS：営業日数",table:"dates",target:"G2",req:["NETWORKDAYS"],exp:22,a:"=NETWORKDAYS(B2,C2)",m:"案件Aの開始日から終了日までの営業日数を出してください。",h:["土日を除いた日数です。"]},
-{id:"dt04",lv:"上級",cat:"日付",t:"WORKDAY：10営業日後",table:"dates",target:"G2",req:["WORKDAY"],exp:"2026-04-15",a:"=WORKDAY(B2,10)",m:"案件Aの開始日から10営業日後の日付を出してください。",h:["開始日の翌営業日から数えます。"]},
-{id:"mix01",lv:"上級",cat:"複合",t:"XLOOKUP＋SUMPRODUCT：売上原価",table:"sales",target:"I2",req:["XLOOKUP","SUMPRODUCT"],exp:884000,a:"=SUMPRODUCT(F2:F13,XLOOKUP(D2:D13,products!A2:A6,products!B2:B6))",m:"数量×単価の合計を出す複合問題です。参考式では別表参照を使います。",h:["この問題は考え方重視。答え表示で構造を確認してください。"]},
-{id:"mix02",lv:"365",cat:"複合",t:"FILTER＋SORT：関東だけ売上降順",table:"sales",target:"I2",req:["FILTER","SORT"],exp:6,a:"=SORT(FILTER(A2:G13,B2:B13=\"関東\"),5,-1)",m:"関東の行だけ抽出し、売上降順に並べてください。",h:["FILTERの結果をSORTに渡します。"]}
-];
-const $=s=>document.querySelector(s);let idx=0,filter='all',query='';const LS='excelmaster-progress-v1';let progress=JSON.parse(localStorage.getItem(LS)||'{}');
-function norm(s){return String(s||'').toUpperCase().replace(/\s+/g,'').replace(/，/g,',')}function addr(a){let m=a.match(/([A-Z]+)(\d+)/);let col=[...m[1]].reduce((n,ch)=>n*26+ch.charCodeAt(0)-64,0)-1;return{row:+m[2]-1,col}}
-function current(){return C[idx]}function tableFor(c){let data=TABLES[c.table].map(r=>r.slice());let rc=addr(c.target);while(data.length<=rc.row)data.push([]);while(data[0].length<=rc.col)data.forEach(r=>{while(r.length<=rc.col)r.push('')});return data}
-function renderList(){let list=C.filter(c=>(filter==='all'||c.lv===filter)&&[c.t,c.cat,c.lv,c.req.join(' ')].join(' ').toLowerCase().includes(query.toLowerCase()));$('#list').innerHTML=list.map(c=>{let i=C.indexOf(c),p=progress[c.id]||{};return `<button class="item ${i===idx?'active':''}" data-i="${i}"><span class="badge">${p.best?'完了':c.lv}</span><b>${c.t}</b><small>${c.cat}｜${c.req.join('・')}</small></button>`}).join('');document.querySelectorAll('.item').forEach(b=>b.onclick=()=>{idx=+b.dataset.i;render()})}
-function render(){let c=current(),p=progress[c.id]||{};$('#meta').textContent=`${c.lv}・${c.cat}`;$('#title').textContent=c.t;$('#scenario').textContent='サンプル表をもとに、指定されたセルへ関数式を入力します。';$('#mission').textContent=c.m;$('#target').textContent=c.target;$('#formula').value=p.last||'';$('#feedback').className='feedbackBox warn';$('#feedback').textContent='まだ採点していません。';$('#tags').innerHTML=c.req.map(x=>`<span class="tag">${x}</span>`).join('');$('#hints').innerHTML=c.h.map(x=>`<li>${x}</li>`).join('');$('#glossary').innerHTML=c.req.map(x=>`<li><b>${x}</b>：${F[x]||'関数の説明を確認しましょう。'}</li>`).join('');renderGrid();renderList();stats()}
-function renderGrid(){let c=current(),data=tableFor(c),rc=addr(c.target),letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ';let rows=Math.max(data.length,12),cols=Math.max(data[0].length,10);let html='<tr><th></th>'+Array.from({length:cols},(_,i)=>`<th>${letters[i]}</th>`).join('')+'</tr>';for(let r=0;r<rows;r++){html+=`<tr><th>${r+1}</th>`;for(let col=0;col<cols;col++){let v=(data[r]&&data[r][col])??'',cls=r===0&&v?'header':'text';if(r===rc.row&&col===rc.col){v=$('#formula').value||'';cls+=' answer'}html+=`<td class="${cls}">${escape(v)}</td>`}html+='</tr>'}$('#grid').innerHTML=html}
-function escape(v){return String(v).replace(/[&<>]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]))}
-function valEq(a,b){if(a&&typeof a==='object'&&a.value!==undefined)a=a.value;if(a instanceof Date)a=a.toISOString().slice(0,10);if(typeof a==='number'&&typeof b==='number')return Math.abs(a-b)<1e-6;return String(a).slice(0,10)===String(b).slice(0,10)||String(a)===String(b)}
-function evalHF(c,formula){if(!window.HyperFormula)throw Error('no engine');let data=tableFor(c);let rc=addr(c.target);data[rc.row][rc.col]=formula;let hf=HyperFormula.buildFromArray(data,{licenseKey:'gpl-v3',useColumnIndex:true});return hf.getCellValue({sheet:0,row:rc.row,col:rc.col})}
-function check(){let c=current(),f=$('#formula').value.trim();let reqOk=c.req.every(fn=>norm(f).includes(fn+'('));let exact=norm(f)===norm(c.a);let value,evalOk=false,err='';try{value=evalHF(c,f);evalOk=valEq(value,c.exp)}catch(e){err=e.message}let ok=(reqOk&&evalOk)||exact;let score=ok?1:(reqOk||exact?.6:0);progress[c.id]={best:Math.max(progress[c.id]?.best||0,score),last:f};localStorage.setItem(LS,JSON.stringify(progress));let cls=ok?'ok':reqOk?'warn':'ng';$('#feedback').className='feedbackBox '+cls;$('#feedback').innerHTML=ok?`正解です。<br>結果：<code>${escape(value??c.exp)}</code>`:`${reqOk?'関数の選び方は近いです。':'指定関数が不足しているかもしれません。'}<br>評価結果：<code>${escape(value??'計算不可')}</code><br>${err?`補足：${escape(err)}<br>`:''}期待値：<code>${escape(c.exp)}</code>`;renderGrid();renderList();stats()}
-function stats(){let vals=C.map(c=>progress[c.id]).filter(Boolean);$('#done').textContent=vals.filter(p=>p.best>=1).length;$('#tried').textContent=vals.length;$('#best').textContent=(vals.length?Math.round(vals.reduce((s,p)=>s+(p.best||0),0)/vals.length*100):0)+'%'}
-$('#check').onclick=check;$('#answer').onclick=()=>{$('#formula').value=current().a;renderGrid()};$('#reset').onclick=()=>{$('#formula').value='';renderGrid()};$('#prev').onclick=()=>{idx=(idx+C.length-1)%C.length;render()};$('#next').onclick=()=>{idx=(idx+1)%C.length;render()};$('#random').onclick=()=>{idx=Math.floor(Math.random()*C.length);render()};$('#search').oninput=e=>{query=e.target.value;renderList()};document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;renderList()});$('#formula').addEventListener('input',renderGrid);render();
-</script>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">ExcelMaster</p>
+        <h1>Excel関数 中級〜上級<br><span>反復トレーニングサイト</span></h1>
+        <p class="lead">問題を選ぶ → シートに式を書く → 答え合わせ。ブラウザだけで、埋め込みExcelっぽく何度でも練習できます。</p>
+      </div>
+      <div class="hero-card" aria-label="進捗サマリー">
+        <div class="stat"><strong id="statCompleted">0</strong><span>完了</span></div>
+        <div class="stat"><strong id="statAttempted">0</strong><span>挑戦済み</span></div>
+        <div class="stat"><strong id="statBest">0%</strong><span>平均ベスト</span></div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="panel compact">
+          <label class="search-label" for="searchBox">問題を探す</label>
+          <input id="searchBox" class="search" type="search" placeholder="XLOOKUP / FILTER / 集計 など" />
+          <div class="filter-row" role="group" aria-label="難易度フィルター">
+            <button class="chip active" data-filter="all">全部</button>
+            <button class="chip" data-filter="中級">中級</button>
+            <button class="chip" data-filter="上級">上級</button>
+            <button class="chip" data-filter="365">365</button>
+          </div>
+          <button id="randomBtn" class="ghost full">ランダム出題</button>
+        </div>
+        <nav id="challengeList" class="challenge-list" aria-label="問題一覧"></nav>
+      </aside>
+
+      <main class="main">
+        <section class="panel challenge-panel">
+          <div class="challenge-head">
+            <div>
+              <p id="challengeMeta" class="meta"></p>
+              <h2 id="challengeTitle"></h2>
+            </div>
+            <div class="nav-buttons">
+              <button id="prevBtn" class="ghost">前へ</button>
+              <button id="nextBtn" class="ghost">次へ</button>
+            </div>
+          </div>
+          <p id="challengeScenario" class="scenario"></p>
+          <div id="functionTags" class="tags"></div>
+          <div class="task-box">
+            <strong>今回のミッション</strong>
+            <p id="challengeInstruction"></p>
+            <details>
+              <summary>ヒントを見る</summary>
+              <div id="challengeHints"></div>
+            </details>
+          </div>
+        </section>
+
+        <section class="panel sheet-panel">
+          <div class="formula-row">
+            <div id="activeAddress" class="address-box">A1</div>
+            <input id="formulaBar" class="formula-bar" spellcheck="false" autocomplete="off" />
+            <button id="checkBtn" class="primary">答え合わせ</button>
+            <button id="resetBtn" class="ghost">リセット</button>
+            <button id="answerBtn" class="ghost">答えを見る</button>
+          </div>
+          <p class="sheet-help">黄色セルが解答セルです。セルをクリックして、数式バーまたはセルに直接入力できます。</p>
+          <div class="grid-wrap">
+            <table id="grid" class="grid" aria-label="疑似Excelシート"></table>
+          </div>
+        </section>
+
+        <section class="two-col">
+          <div class="panel feedback-panel">
+            <h3>採点結果</h3>
+            <div id="feedback" class="feedback empty">まだ採点していません。</div>
+          </div>
+          <div class="panel glossary-panel">
+            <h3>関数メモ</h3>
+            <div id="glossary" class="glossary"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>
